@@ -61,7 +61,7 @@ pipeline {
             }
           }
       steps {
-        slackSend(failOnError: true, message: 'the uploading is done succefully !')
+        slackSend(failOnError: true, message: 'the uploading is done succefully')
       }
     }
   }
