@@ -13,7 +13,6 @@ pipeline {
 
     stage('Mail notif') {
       steps {
-        emailext(subject: 'Jenkins notif', body: 'build done', to: 'ir_zourane@esi.dz', from: 'ir_zourane@esi.dz')
         mail(subject: 'Build Complete', body: 'Build', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')
       }
     }
