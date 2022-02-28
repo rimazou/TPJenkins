@@ -2,6 +2,11 @@ pipeline {
   agent any
   stages {
     stage('Build') {
+      post{
+        success{mail(subject: 'Build success', body: 'Build completed successfully', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')}
+        failure{mail(subject: 'Build failed', body: 'Something went wrong with the build', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')}
+      }
+      
       steps {
         bat 'gradle build'
         bat 'gradle javadoc'
@@ -13,13 +18,17 @@ pipeline {
 
     stage('Mail notif') {
       steps {
-        mail(subject: 'Build Complete', body: 'Build', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')
+        mail(subject: 'Build Complete', body: 'Build completed', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')
       }
     }
 
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
+             post{
+        failure{mail(subject: 'sonar failed', body: 'Something went wrong with the scan', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')}
+      }
+      
           steps {
             bat 'gradle sonarqube'
           }
