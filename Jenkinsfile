@@ -13,11 +13,5 @@ pipeline {
       }
     }
 
-    stage('Slack notification') {
-      steps {
-        slackSend(message: 'notif jenkins', attachments: 'jenkins', blocks: 'hi its a notif from jenkins')
-      }
-    }
-
   }
 }
