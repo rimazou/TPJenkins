@@ -27,7 +27,7 @@ pipeline {
       parallel {
         stage('Code Analysis') {
           steps {
-            waitForQualityGate true
+            bat 'gradle sonarqube'
           }
         }
 
