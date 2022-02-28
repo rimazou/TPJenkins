@@ -7,7 +7,7 @@ pipeline {
         bat 'gradle javadoc'
         bat 'gradle jar'
         bat 'gradle jacocoTestReport'
-        junit 'build/reports/tests/test/**'
+        archiveArtifacts 'build/libs/*.jar'
       }
     }
 
@@ -16,7 +16,8 @@ pipeline {
         emailext(subject: 'Jenkins notif', body: 'build done', to: 'ir_zourane@esi.dz', from: 'ir_zourane@esi.dz')
       }
     }
- stage('build') {
+
+    stage('build') {
       parallel {
         stage('build') {
           steps {
@@ -69,5 +70,6 @@ pipeline {
         slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'xapp-1-A02T1NA6Z9U-3154115032311-f98f2aea5e021c531987a31803e06dc232d17ae65f15b8c0e58b7fbca7763940', message: 'slack notification')
       }
     }
+
   }
 }
