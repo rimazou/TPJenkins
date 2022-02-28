@@ -17,12 +17,6 @@ pipeline {
       }
     }
 
-    stage('test') {
-      steps {
-        bat 'gradle test'
-      }
-    }
-
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
@@ -49,7 +43,7 @@ pipeline {
 
     stage('Slack Notif') {
       steps {
-        slackSend(baseUrl: 'https://hooks.slack.com/services/', message: 'slack notification', blocks: 'this is a notif from jenkins', attachments: 'Notif Jenkins', channel: 'dev', token: 'T02TY4XHSTA/B0350LLFUQ2/Vg7GvzlptiNS4qqcDvTvvMHm')
+        slackSend(baseUrl: 'https://hooks.slack.com/services/', message: 'slack notification', blocks: 'Deployement successful', attachments: 'Notif Jenkins', channel: 'dev', token: 'T02TY4XHSTA/B0350LLFUQ2/Vg7GvzlptiNS4qqcDvTvvMHm', username: 'ir_zourane')
       }
     }
 
