@@ -2,11 +2,16 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      post{
-        success{mail(subject: 'Build success', body: 'Build completed successfully', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')}
-        failure{mail(subject: 'Build failed', body: 'Something went wrong with the build', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')}
+      post {
+        success {
+          mail(subject: 'Build success', body: 'Build completed successfully', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')
+        }
+
+        failure {
+          mail(subject: 'Build failed', body: 'Something went wrong with the build', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')
+        }
+
       }
-      
       steps {
         bat 'gradle build'
         bat 'gradle javadoc'
@@ -25,10 +30,12 @@ pipeline {
     stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
-             post{
-        failure{mail(subject: 'sonar failed', body: 'Something went wrong with the scan', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')}
-      }
-      
+          post {
+            failure {
+              mail(subject: 'sonar failed', body: 'Something went wrong with the scan', from: 'ir_zourane@esi.dz', to: 'ir_zourane@esi.dz')
+            }
+
+          }
           steps {
             bat 'gradle sonarqube'
           }
@@ -50,9 +57,9 @@ pipeline {
       }
     }
 
-    stage('Slack Notif') {
+    stage('Slack notif') {
       steps {
-        slackSend(baseUrl: 'https://hooks.slack.com/services/', message: 'slack notification', blocks: 'Deployement successful', attachments: 'Notif Jenkins', channel: 'dev', token: 'T02TY4XHSTA/B0350LLFUQ2/Vg7GvzlptiNS4qqcDvTvvMHm', username: 'ir_zourane')
+        slackSend(attachments: 'Deploy', baseUrl: 'https://hooks.slack.com/services', token: 'T02TY4XHSTA/B0350LLFUQ2/Vg7GvzlptiNS4qqcDvTvvMHm', tokenCredentialId: 'xoxe.xoxp-1-Mi0yLTI5NTAxNjc2MDQ5MjgtMjkyODczMDc1NTg0NC0zMTgzNjM1NTU5NDI1LTMxNzMzNTIxNzUzMDAtODRjNTU5ZTBiZTM2NjFkMGM0OWQ1OWU0NGE0NTA0ZDcwNTBiYzhlZTc2ZGY4OTdiMTIwZGIwYjRkMDc4ZTI4OA')
       }
     }
 
