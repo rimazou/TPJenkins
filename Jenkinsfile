@@ -30,7 +30,7 @@ pipeline {
             }
 
             withSonarQubeEnv('sonarqube') {
-              sh 'C:\sonarqube-7.4\bin\windows-x86-64sonar-scanner.bat'
+              sh 'C:\\\\sonarqube-7.4\\\\bin\\\\windows-x86-64sonar-scanner.bat'
             }
 
           }
