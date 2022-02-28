@@ -23,7 +23,7 @@ pipeline {
       }
     }
 
-    stage('documentation') {
+    stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
           steps {
@@ -31,7 +31,7 @@ pipeline {
           }
         }
 
-        stage('Cucumber') {
+        stage('Test Reporting') {
           steps {
             cucumber(fileIncludePattern: '**/Cucumber.json', buildStatus: 'Unstable', jsonReportDirectory: 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\TPJenkins_main\\build\\reports')
           }
