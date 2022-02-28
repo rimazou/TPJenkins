@@ -18,20 +18,9 @@ pipeline {
     }
 
     stage('build') {
-      parallel {
-        stage('build') {
-          steps {
-            bat 'gradle build'
-            archiveArtifacts 'build/libs/*.jar'
-          }
-        }
-
-        stage('mail') {
-          steps {
-            mail(subject: 'jenkins notif', body: 'jenkins build', cc: 'ir_zourane@esi.dz', from: 'ir_zourane@esi.dz')
-          }
-        }
-
+      steps {
+        bat 'gradle build'
+        archiveArtifacts 'build/libs/*.jar'
       }
     }
 
