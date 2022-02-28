@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        withGradle()
+        bat 'gradle build'
       }
     }
 
@@ -15,7 +15,7 @@ pipeline {
 
     stage('Slack notification') {
       steps {
-        slackSend(message: 'notif jenkins')
+        slackSend(message: 'notif jenkins', attachments: 'jenkins', blocks: 'hi its a notif from jenkins')
       }
     }
 
