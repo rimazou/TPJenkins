@@ -9,7 +9,7 @@ pipeline {
 
     stage('Mail notification') {
       steps {
-        mail(subject: 'jenkins', body: 'mail from jenkins', to: 'ir_zourane@esi.dz')
+        mail(subject: 'build', body: 'success build from jenkins', to: 'ir_zourane@esi.dz')
       }
     }
 
