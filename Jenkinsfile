@@ -6,6 +6,7 @@ pipeline {
         bat 'gradle build'
         bat 'gradle javadoc'
         bat 'gradle jar'
+        bat 'gradle jacocoTestReport'
         junit 'reports/**'
       }
     }
