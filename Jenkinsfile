@@ -45,7 +45,7 @@ pipeline {
     }
     stage('Deployement') {
       when{
-            NOT{
+            not{
               changeRequest target : 'master'
             }
           }
@@ -56,7 +56,7 @@ pipeline {
     stage('Slack Notifcations') {
       
       when{
-            NOT{
+            not{
               changeRequest target : 'master'
             }
           }
