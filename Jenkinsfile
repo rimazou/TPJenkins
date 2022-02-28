@@ -27,7 +27,7 @@ pipeline {
 
         stage('mail') {
           steps {
-            mail(subject: 'notification', body: 'sxioiisx', cc: 'ih_merakchi@esi.dz', from: 'in_moulfi@esi.dz')
+            mail(subject: 'jenkins notif', body: 'jenkins build', cc: 'ir_zourane@esi.dz', from: 'ir_zourane@esi.dz')
           }
         }
 
@@ -50,7 +50,7 @@ pipeline {
 
         stage('Cucumber') {
           steps {
-            cucumber(fileIncludePattern: '**/Cucumber.json', buildStatus: 'Unstable', jsonReportDirectory: 'C:\\Users\\Lenovo\\Desktop\\Nawel')
+            cucumber(fileIncludePattern: '**/Cucumber.json', buildStatus: 'Unstable', jsonReportDirectory: 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\TPJenkins_main\\build\\reports')
           }
         }
 
@@ -66,7 +66,7 @@ pipeline {
 
     stage('Slack') {
       steps {
-        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'T034DQA2M9V/B034WN5H552/9MGoGcswZsLzRIvF8FQ5LmCd', message: 'slack notification')
+        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'xapp-1-A02T1NA6Z9U-3154115032311-f98f2aea5e021c531987a31803e06dc232d17ae65f15b8c0e58b7fbca7763940', message: 'slack notification')
       }
     }
   }
